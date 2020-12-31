@@ -8,6 +8,8 @@ public class GunScript : MonoBehaviour
     public Health health;
     public Camera targetCamera;
     public GameObject crosshair;
+    public ScoreScript scoreScript;
+    public AccuracyScript accuracyScript;
     private Vector3 target;
     private GameObject theTarget;
     // Start is called before the first frame update
@@ -26,16 +28,21 @@ public class GunScript : MonoBehaviour
         {
             if (enemy)
             {
-                //kills enemy & +hp
+                //kills enemy & +hp & +score
                 Destroy(theTarget);
                 health.Damage(-2);
+                scoreScript.CallUpdate(100);
+                accuracyScript.CallUpdate(1);
             }
             else
             {
-                //reduce score instead of damage
-                health.Damage(10);
+                //-hp & -score
+                health.Damage(5);
+                scoreScript.CallUpdate(-25);
+                accuracyScript.CallUpdate(0);
             }
         }
+        if (Input.GetKeyDown(KeyCode.Space)) scoreScript.CallUpdate(5000);
      }
 
     public void CrosshairOnEnemy(bool a, Collision2D collision)
