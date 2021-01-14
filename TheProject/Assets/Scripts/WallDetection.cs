@@ -12,7 +12,8 @@ public class WallDetection : MonoBehaviour
         {
             Destroy(collision.gameObject);
             health.Damage(10);
-            scoreScript.CallUpdate(-75);
+            //change it to something else
+            //scoreScript.CallUpdate(-75);
         }
     }
 }

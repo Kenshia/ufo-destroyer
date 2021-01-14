@@ -15,6 +15,7 @@ public class Health : MonoBehaviour
     public void Damage(int i)
     {
         if (HP - i > 100) HP = 100;
+        else if (HP <= 0) Time.timeScale = 0;
         else HP -= i;
     }
 

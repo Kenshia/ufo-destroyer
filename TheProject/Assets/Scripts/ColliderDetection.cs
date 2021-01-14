@@ -8,18 +8,12 @@ public class ColliderDetection : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Enemy"))
-        {
-            main.CrosshairOnEnemy(true, collision);
-        }
+        main.CrosshairOnEnemy(true, collision);
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Enemy"))
-        {
-            main.CrosshairOnEnemy(false, collision);
-        }
+        main.CrosshairOnEnemy(false, collision);
     }
 
 }

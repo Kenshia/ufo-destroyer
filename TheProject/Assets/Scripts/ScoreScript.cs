@@ -14,6 +14,6 @@ public class ScoreScript : MonoBehaviour
     {
         actualScore += a;
         enemyScript.SpeedUpdate(actualScore);
-        score.text = "Score: " + actualScore;
+        score.text = "x " + actualScore;
     }
 }

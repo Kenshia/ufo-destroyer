@@ -20,9 +20,9 @@ public class EnemyScript : MonoBehaviour
     }
     public void SpeedUpdate(int score)
     {
-        EnemySpeed = StartingEnemySpeed + score / 1000;
+        EnemySpeed = StartingEnemySpeed + score / 10;
         EnemySpeed2 = EnemySpeed * 5 / 4;
-        timerSpeed = StartingTimerSpeed + score / 1000;
+        timerSpeed = StartingTimerSpeed + score / 10;
     }
      private void FixedUpdate()
     {

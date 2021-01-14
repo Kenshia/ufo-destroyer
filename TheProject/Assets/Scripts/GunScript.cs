@@ -28,21 +28,28 @@ public class GunScript : MonoBehaviour
         {
             if (enemy)
             {
-                //kills enemy & +hp & +score
-                Destroy(theTarget);
-                health.Damage(-2);
-                scoreScript.CallUpdate(100);
-                accuracyScript.CallUpdate(1);
+                if (theTarget.CompareTag("Enemy"))
+                {
+                    //kills enemy & +hp & +score
+                    Destroy(theTarget);
+                    health.Damage(-2);
+                    scoreScript.CallUpdate(1);
+                    accuracyScript.CallUpdate(1);
+                }
+                else
+                {
+                    scoreScript.CallUpdate(0);
+                }
             }
             else
             {
                 //-hp & -score
                 health.Damage(5);
-                scoreScript.CallUpdate(-25);
+                //change to miss count? or just remove it totally
+                //scoreScript.CallUpdate(-25);
                 accuracyScript.CallUpdate(0);
             }
         }
-        if (Input.GetKeyDown(KeyCode.Space)) scoreScript.CallUpdate(5000);
      }
 
     public void CrosshairOnEnemy(bool a, Collision2D collision)
