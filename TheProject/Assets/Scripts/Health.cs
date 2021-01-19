@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+    public ScoreScript scoreScript;
     public float HP;
     public Slider HealthBar;
     private void FixedUpdate()
@@ -15,7 +16,11 @@ public class Health : MonoBehaviour
     public void Damage(int i)
     {
         if (HP - i > 100) HP = 100;
-        else if (HP <= 0) Time.timeScale = 0;
+        else if (HP <= 0)
+        {
+            Time.timeScale = 0;
+            scoreScript.UpdateHighscore();
+        }
         else HP -= i;
     }
 

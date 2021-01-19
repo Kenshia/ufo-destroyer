@@ -20,12 +20,14 @@ public class EnemyScript : MonoBehaviour
     }
     public void SpeedUpdate(int score)
     {
-        EnemySpeed = StartingEnemySpeed + score / 10;
-        EnemySpeed2 = EnemySpeed * 5 / 4;
-        timerSpeed = StartingTimerSpeed + score / 10;
+        EnemySpeed = StartingEnemySpeed + score / 8;    //well this is the speed so higher = faster ofc
+        EnemySpeed2 = EnemySpeed * 5 / 4;               
+        timerSpeed = StartingTimerSpeed + score / 11;   //higher = faster enemy spawn
+        timerReference += 3;       //higher = slower enemy spawn
     }
      private void FixedUpdate()
     {
+        
         timer -= timerSpeed;
         if(timer <= 0)
         {
@@ -33,7 +35,6 @@ public class EnemyScript : MonoBehaviour
             timer = timerReference;
         }
     }
-
     void spawnEnemy(Vector3 Location, int side)
     {
         if (side <= 5)
