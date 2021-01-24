@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Wall
   - Ignore
+  - Floor
   layers:
   - Default
   - TransparentFX

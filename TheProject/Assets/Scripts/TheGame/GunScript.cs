@@ -15,6 +15,7 @@ public class GunScript : MonoBehaviour
     public AccuracyScript accuracyScript;
     public GameObject pausemenu;
     public GameObject settingsmenu;
+    public GameObject defeatmenu;
     private Vector3 target;
     private GameObject theTarget;
     // Start is called before the first frame update
@@ -25,6 +26,7 @@ public class GunScript : MonoBehaviour
         Cursor.visible = false;
         pausemenu.SetActive(false);
         settingsmenu.SetActive(false);
+        defeatmenu.SetActive(false);
     }
 
     // Update is called once per frame
