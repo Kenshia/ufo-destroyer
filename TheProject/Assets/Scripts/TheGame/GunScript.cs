@@ -16,12 +16,14 @@ public class GunScript : MonoBehaviour
     public GameObject pausemenu;
     public GameObject settingsmenu;
     public GameObject defeatmenu;
+    public GameObject tutorialMenu;
     private Vector3 target;
     private GameObject theTarget;
     // Start is called before the first frame update
     void Start()
     {
-        Time.timeScale = 1f;
+        Time.timeScale = 0f;
+        tutorialMenu.SetActive(true);
         enemy = false;
         Cursor.visible = false;
         pausemenu.SetActive(false);
@@ -32,7 +34,7 @@ public class GunScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if(Time.timeScale==1)
             {
@@ -93,5 +95,11 @@ public class GunScript : MonoBehaviour
     {
         theTarget = collision.gameObject;
         enemy = a;
+    }
+
+    public void StartTheGame()
+    {
+        tutorialMenu.SetActive(false);
+        Time.timeScale = 1f;
     }
 }

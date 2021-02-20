@@ -16,6 +16,7 @@ public class MenuScript : MonoBehaviour
     {
         SceneManager.LoadScene(a);
         if (a != 2) Cursor.visible = true;
+        Cursor.visible = true;
     }
     
     public void ExitGame()

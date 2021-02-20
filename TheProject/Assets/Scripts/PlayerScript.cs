@@ -13,10 +13,19 @@ public class PlayerScript : MonoBehaviour
     public GameObject LeftHitbox;
     public Slider HPSlider;
     public SimpleRPGMenus menu;
+    public Slider xpSlider;
+    //make these 3 private
+    //add stats (str, agi, health, etc)
+    public int level;
+    public int xp;
+    public int xpNeeded;
     private int invicibility;
     private float sprint;
     private void Awake()
     {
+        level = 1; //make it into playerprefs?
+        xpNeeded = 10;
+        AddXp(0); // for update
         HPSlider.value = hp;
         sprint = 1f;
         RightHitbox.SetActive(true);
@@ -85,5 +94,19 @@ public class PlayerScript : MonoBehaviour
     {
         //buat kalo bakal ada upgrades / stats
         HPSlider.maxValue = a;
+    }
+
+    public void AddXp(int a)
+    {
+        xp += a;
+        if (xp >= xpNeeded)
+        {
+            level += 1;
+            xp -= xpNeeded;
+            xpNeeded = 5 + level * 5;
+            hp = 100; //change it to max hp, soonTM
+            HPSlider.value = hp; 
+        }
+        xpSlider.value = xp * 100 / xpNeeded;
     }
 }

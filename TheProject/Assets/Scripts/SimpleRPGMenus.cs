@@ -9,7 +9,7 @@ public class SimpleRPGMenus : MonoBehaviour
     public GameObject defeatMenu;
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             PauseRPG();
         }
