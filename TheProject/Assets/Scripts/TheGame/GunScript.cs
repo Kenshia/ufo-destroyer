@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GunScript : MonoBehaviour
 {
@@ -19,9 +20,29 @@ public class GunScript : MonoBehaviour
     public GameObject tutorialMenu;
     private Vector3 target;
     private GameObject theTarget;
+    public AudioSource laserSfx;
+    public AudioSource boomSfx;
+    public GameObject cheats;
+    public Toggle cheatsToggle;
+    public Toggle godModeToggle;
+    public ParticleSystem explodeEffect;
+    private bool godMode;
     // Start is called before the first frame update
     void Start()
     {
+        //cheats
+        if (PlayerPrefs.GetInt("cheats", 0) == 1)
+        {
+            cheatsToggle.isOn = true;
+            cheats.SetActive(true);
+        }
+        else 
+        {
+            cheatsToggle.isOn = false;
+            cheats.SetActive(false); 
+        }
+        godModeToggle.isOn = false;
+
         Time.timeScale = 0f;
         tutorialMenu.SetActive(true);
         enemy = false;
@@ -34,6 +55,7 @@ public class GunScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (godMode) health.Damage(-1);
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if(Time.timeScale==1)
@@ -56,18 +78,24 @@ public class GunScript : MonoBehaviour
                 if (theTarget.CompareTag("Enemy"))
                 {
                     //kills enemy & +hp & +score
+                    explodeEffect.transform.position = theTarget.transform.position;
+                    explodeEffect.Play();
                     Destroy(theTarget);
                     health.Damage(-2);
                     scoreScript.CallUpdate(1);
                     accuracyScript.CallUpdate(1);
+                    laserSfx.Play();
+                    boomSfx.Play();
                 }
                 else
                 {
+                    //what is this for? just delete it if its useless
                     scoreScript.CallUpdate(0);
                 }
             }
             else
             {
+                laserSfx.Play();
                 //-hp & -score
                 health.Damage(5);
                 //change to miss count? or just remove it totally
@@ -101,5 +129,25 @@ public class GunScript : MonoBehaviour
     {
         tutorialMenu.SetActive(false);
         Time.timeScale = 1f;
+    }
+
+    public void ToggleCheats()
+    {
+        if (cheatsToggle.isOn)
+        {
+            cheats.SetActive(true);
+            PlayerPrefs.SetInt("cheats", 1);
+        }
+        else
+        {
+            cheats.SetActive(false);
+            PlayerPrefs.SetInt("cheats", 0);
+        }
+    }
+
+    public void ToggleGodMode()
+    {
+        if (godModeToggle.isOn) godMode = true;
+        else godMode = false;
     }
 }

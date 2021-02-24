@@ -4,6 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 public class SimpleRPGEnemyScript : MonoBehaviour
 {
+    [SerializeField] private int level;
+    public int Level
+    {
+        get { return level; }
+        set { level = value; }
+    }
+
     public int objectHp;
     public bool damage;
     public int inviciblity; //change it to inspector
@@ -13,7 +20,8 @@ public class SimpleRPGEnemyScript : MonoBehaviour
 
     private void Awake()
     {
-        objectHp = Random.Range(5, 15); //make this into enemy level
+        if (level <= 0) level = 1;
+        objectHp = Random.Range((level+1)*5, (level+3)*5); //make this into enemy level
         startingHp = objectHp;
         damage = false;
     }
@@ -22,12 +30,13 @@ public class SimpleRPGEnemyScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             //make reference for player damage
-            TakeDamage(5);
+            TakeDamage(player.dmg);
         }
     }
     private void FixedUpdate()
     {
         if(inviciblity >= 0) inviciblity -= 1;
+        if (this.transform.position.y < -15) this.transform.position = new Vector3(0, 2);
     }
     public void TakeDamage(int a)
     {
@@ -37,7 +46,7 @@ public class SimpleRPGEnemyScript : MonoBehaviour
             if (objectHp <= 0)
             {
                 Destroy(gameObject);
-                player.AddXp(Random.Range(1, 5)); //make this into enemy level
+                player.AddXp(Random.Range((level+1), (level+1)*5)); //make this into enemy level
                 //make gold drop
             }
             healthbar.transform.localScale = new Vector3(objectHp*100 / startingHp, 5, 1);

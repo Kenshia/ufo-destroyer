@@ -7,7 +7,13 @@ using TMPro;
 
 public class MenuScript : MonoBehaviour
 {
+    public Slider bgmSlider;
     public ScoreScript score;
+    private void Awake()
+    {
+        Time.timeScale = 1f;
+        bgmSlider.value = PlayerPrefs.GetFloat("bgmVolume", 1f);
+    }
     public void CheatScore(int a)
     {
         score.CallUpdate(a);
@@ -22,5 +28,11 @@ public class MenuScript : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void UpdateBgmVolume()
+    {
+        float a = bgmSlider.value;
+        PlayerPrefs.SetFloat("bgmVolume", a);
     }
 }
