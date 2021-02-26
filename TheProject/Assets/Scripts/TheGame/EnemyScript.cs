@@ -22,8 +22,8 @@ public class EnemyScript : MonoBehaviour
     {
         EnemySpeed = StartingEnemySpeed + score / 8;    //well this is the speed so higher = faster ofc
         EnemySpeed2 = EnemySpeed * 5 / 4;               
-        timerSpeed = StartingTimerSpeed + score / 11;   //higher = faster enemy spawn
-        timerReference += 3;       //higher = slower enemy spawn
+        timerSpeed = StartingTimerSpeed + score / 10;   //higher = faster enemy spawn
+        timerReference = timer + (score * 2);       //higher = slower enemy spawn
     }
      private void FixedUpdate()
     {
